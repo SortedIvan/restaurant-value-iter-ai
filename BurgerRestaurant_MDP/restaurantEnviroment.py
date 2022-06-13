@@ -18,14 +18,12 @@ class RestaurantEnvironment():
             self.__initial_state[17] = B2
             self.__initial_state[0] = START
             self.__initial_state[24] = END
-            # start with empty board
         else:
             self.__initial_state = copy(initial_state)  # copy to prevent aliassing
         self.__state = self.__initial_state
         self.__possible_states = []
         # self.__calculate_possible_states(self.__initial_state)
-        self.currentWord = ""
-        self.curPlayerPos = 0
+        self.playerState = (0, "")
 
 
     def reset(self):
@@ -41,11 +39,11 @@ class RestaurantEnvironment():
         elif playerPosition == 8:
             return "R"
         elif playerPosition == 17:
-                return "G"
+            return "G"
 
 
     def step(self, playerPosition):
-        self.currentWord += self.calculate_curr_word(playerPosition)
+        self.playerState[1] += self.calculate_curr_word(playerPosition)
         observation = self.__state  # environment is fully observable
         done = self.get_killed_or_live(self)
         info = {}  # optional debug info
@@ -82,23 +80,23 @@ class RestaurantEnvironment():
     #     return self.__possible_states
 
     def get_possible_actions(self):
-        if self.curPlayerPos in (6, 7, 8,11,12,13,16,17,18):
-            return [self.curPlayerPos + 1, self.curPlayerPos - 1, self.curPlayerPos - 5, self.curPlayerPos + 5]
-        elif self.curPlayerPos in (1,2,3):
-            return [self.curPlayerPos + 1, self.curPlayerPos - 1, self.curPlayerPos + 5]
-        elif self.curPlayerPos in (5, 10, 15):
-            return [self.curPlayerPos + 5, self.curPlayerPos -5, self.curPlayerPos + 1]
-        elif self.curPlayerPos in (9, 14, 19):
-            return [self.curPlayerPos + 5, self.curPlayerPos - 5, self.curPlayerPos - 1]
-        elif self.curPlayerPos in (21, 22, 23):
-            return [self.curPlayerPos + 1, self.curPlayerPos - 5, self.curPlayerPos - 1]
-        elif self.curPlayerPos == 0:
-            return [self.curPlayerPos + 1, self.curPlayerPos + 5]
-        elif self.curPlayerPos == 4:
-            return [self.curPlayerPos - 1, self.curPlayerPos + 5]
-        elif self.curPlayerPos == 20:
-            return [self.curPlayerPos + 1, self.curPlayerPos - 5]
-        elif self.curPlayerPos == 24:
+        if self.playerState[0] in (6, 7, 8,11,12,13,16,17,18):
+            return [self.playerState[0] + 1, self.playerState[0] - 1, self.playerState[0] - 5, self.playerState[0] + 5]
+        elif self.playerState[0] in (1,2,3):
+            return [self.playerState[0] + 1, self.playerState[0] - 1, self.playerState[0] + 5]
+        elif self.playerState[0] in (5, 10, 15):
+            return [self.playerState[0] + 5, self.playerState[0] -5, self.playerState[0] + 1]
+        elif self.playerState[0] in (9, 14, 19):
+            return [self.playerState[0] + 5, self.playerState[0] - 5, self.playerState[0] - 1]
+        elif self.playerState[0] in (21, 22, 23):
+            return [self.playerState[0] + 1, self.playerState[0] - 5, self.playerState[0] - 1]
+        elif self.playerState[0] == 0:
+            return [self.playerState[0] + 1, self.playerState[0] + 5]
+        elif self.playerState[0] == 4:
+            return [self.playerState[0] - 1, self.playerState[0] + 5]
+        elif self.playerState[0] == 20:
+            return [self.playerState[0] + 1, self.playerState[0] - 5]
+        elif self.playerState[0] == 24:
             return 24
 
 
