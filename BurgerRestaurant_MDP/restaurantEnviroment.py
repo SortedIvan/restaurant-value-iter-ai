@@ -22,6 +22,7 @@ class RestaurantEnvironment():
             self.__initial_state = copy(initial_state)
             self.__state = self.__initial_state
 
+
     def reset(self):
         self.__state = self.__initial_state
         return self.__state
