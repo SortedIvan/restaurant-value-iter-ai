@@ -97,37 +97,37 @@ class RestaurantEnvironment():
         elif self.playerState[0] == 24:
             return 24
 
-    def get_step_probability(self, new_state, inventory):
+    def get_step_probability(self, new_state, new_item):
         new_states = self.get_possible_actions()
         if new_states.__contains__(new_state):
             if new_state == 8:
-                if self.playerState[1] == "BU" and inventory == "R":      # HUGE QUESTION ? -> self.playerState[1] == "" and inventory == "R" return 1/0?
+                if new_item == self.playerState[1] + "R":
                     return 1
                 else:
                     return 0
             elif new_state == 11:
-                if self.playerState[1] == "" and inventory == "B":
+                if new_item == self.playerState[1] + "B":
                     return 1
                 else:
                     return 0
             elif new_state == 17:
-                if self.playerState[1] == "BUR" and inventory == "G":
+                if new_item == self.playerState[1] + "G":
                     return 1
                 else:
                     return 0
             elif new_state == 21:
-                    if self.playerState[1] == "B" and inventory == "U":
+                    if new_item == self.playerState[1] + "U":
                         return 1
                     else:
                         return 0
-            elif self.playerState[1] == inventory :
+            elif self.playerState[1] == new_item:
                 return 1
             else:
                 return 0
         else:
             return 0
 
-    def get_killed_or_live(self):  # B
+    def get_killed_or_live(self):
         # Reward R(s) for every possible state
         # Current word must be stored somewhere else
         # B, BU, BUR, BURG
