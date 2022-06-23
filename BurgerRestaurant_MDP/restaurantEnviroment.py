@@ -97,33 +97,32 @@ class RestaurantEnvironment():
         elif self.playerState[0] == 24:
             return 24
 
-    def get_step_probability(self, new_state, new_item):
+    def get_step_probability(self, new_state, new_inventory):
         new_states = self.get_possible_actions()
+        current_inventory = self.playerState[1]
         if new_states.__contains__(new_state):
-            if new_state == 8:
-                if new_item == self.playerState[1] + "R":
+            if new_state == 8: # State 8 contains R
+                if new_inventory == current_inventory + "R":
                     return 1
                 else:
                     return 0
-            elif new_state == 11:
-                if new_item == self.playerState[1] + "B":
+            elif new_state == 11: # State 11 contains B
+                if new_inventory == current_inventory + "B":
                     return 1
                 else:
                     return 0
-            elif new_state == 17:
-                if new_item == self.playerState[1] + "G":
+            elif new_state == 17: # State 17 contains G
+                if new_inventory == current_inventory + "G":
                     return 1
                 else:
                     return 0
-            elif new_state == 21:
-                    if new_item == self.playerState[1] + "U":
+            elif new_state == 21: # State 21 Contains U
+                    if new_inventory == current_inventory + "U":
                         return 1
                     else:
                         return 0
-            elif self.playerState[1] == new_item:
+            elif current_inventory == new_inventory:
                 return 1
-            else:
-                return 0
         else:
             return 0
 
