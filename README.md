@@ -1,1 +1,2 @@
 # restaurant-value-iter-ai
+A simple project revolved around training an AI agent to traverse a matrix, collect certain ingredients in order and return to his original positon. The algorithm used for the training of AI is value iteration and the action space is defined with 4 simple operations: UP, DOWN, LEFT, RIGHT. In case of the agent collecting the wrong ingredient or in the incorrect order, the game is reset.
